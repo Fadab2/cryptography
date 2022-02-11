@@ -42,7 +42,8 @@ def decrypt(encrypted, key):
 
 def crack(encrypted):
     cracked_text = ''
-    for shift in (range(0,26)):
+    shift = 0
+    while shift < 26:
         cracked_text =  decrypt(encrypted, shift)
         #print(f'shift: {shift}')
         # split the string into a list of words
@@ -52,9 +53,9 @@ def crack(encrypted):
         len_of_words = len(words)
         #print("The length of words is: ", len_of_words)
         words_percentage = 0
-
+        shift += 1
         for word in words:
-            
+            word = re.sub(r"[^A-Za-z]+", "", word)            
             if word.lower() in words_list or word in names_list:
                 #print(word)
                 num_of_words += 1
